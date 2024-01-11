@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+}
+
+mat-card {
+  width: calc(100% - 32px);
+  margin: 24px auto;
+  border-radius: 0px 0px 8px 8px;
+  /*box-shadow: 2px 2px 2px #ccc;
+  background-color: transparent;*/
+
+  mat-toolbar {
+    border-radius: 8px 8px 0px 0px;
+  }
+
+}
