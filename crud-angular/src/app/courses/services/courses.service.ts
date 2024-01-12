@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../model/course';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   list(): Course[] {
     return [
