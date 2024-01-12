@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import { Course } from '../model/course';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -9,14 +10,16 @@ import { Course } from '../model/course';
 })
 export class CoursesComponent {
 
-  coursesData: Course[] = [
-    {   _id: "01" , name: "angular" , category: "front-end" }
-  ];
+  coursesData: Course[] = [];
 
   displayedColumns: string[] = [ "_id", "name", "category" ]
-  dataSource = this.coursesData;
 
-  constructor() {}
+  coursesService: CoursesService;
+
+  constructor() {
+    this.coursesService = new CoursesService();
+    this.coursesData = this.coursesService.list();
+  }
 
 }
 
