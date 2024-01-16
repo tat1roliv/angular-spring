@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-courses',
@@ -10,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CoursesComponent {
 
-  coursesData: Course[] = [];
+  //coursesData: Course[] = [];
+  coursesData: Observable<Course[]>;
 
   displayedColumns: string[] = [ "_id", "name", "category" ]
 
