@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class CoursesComponent {
 
   //coursesData: Course[] = [];
-  coursesData: Observable<Course[]>;
+  courses$: Observable<Course[]>;
 
   displayedColumns: string[] = [ "_id", "name", "category" ]
 
@@ -20,7 +20,7 @@ export class CoursesComponent {
 
   constructor(private coursesService: CoursesService) {
     //this.coursesService = new CoursesService();
-    this.coursesData = this.coursesService.list();
+    this.courses$ = this.coursesService.list();
   }
 
 }
