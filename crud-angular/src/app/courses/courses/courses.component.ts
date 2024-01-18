@@ -3,6 +3,7 @@ import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -20,7 +21,13 @@ export class CoursesComponent {
 
   constructor(private coursesService: CoursesService) {
     //this.coursesService = new CoursesService();
-    this.courses$ = this.coursesService.list();
+    this.courses$ = this.coursesService.list()
+    .pipe(
+      catchError(error => {
+        console.log(error)
+        return of([])
+      })
+    );
   }
 
 }
