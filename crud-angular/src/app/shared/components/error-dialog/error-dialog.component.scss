@@ -1,0 +1,10 @@
+.dialog-error-card {
+  width: 520px;
+  padding: 16px;
+  border-radius:  8px;
+
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
