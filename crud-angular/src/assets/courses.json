@@ -1,4 +1,5 @@
 [
-      {   "_id": "01" , "name": "angular" , "category": "front-end from assets/json" }
+      {   "_id": "01" , "name": "angular" , "category": "front-end" },
+      {   "_id": "02" , "name": "java" , "category": "back-end" }
 ]
 

@@ -13,6 +13,12 @@ mat-card {
 
 }
 
+.category {
+  display: flex;
+  align-items: center;
+  height: 51px;
+}
+
 .loading-spinner {
   display: flex;
   justify-content: center;
