@@ -39,6 +39,7 @@ export class CoursesComponent {
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
+      
     });
   }
 
