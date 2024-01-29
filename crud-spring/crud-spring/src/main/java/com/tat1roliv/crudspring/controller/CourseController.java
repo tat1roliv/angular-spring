@@ -1,14 +1,16 @@
 package com.tat1roliv.crudspring.controller;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.tat1roliv.crudspring.model.Course;
-import com.tat1roliv.repository.CourseRepository;
+import com.tat1roliv.crudspring.repository.CourseRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -16,7 +18,6 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/api/courses")
 @AllArgsConstructor
 
-@Component
 public class CourseController {
 
     private final CourseRepository courseRepository;
@@ -24,6 +25,7 @@ public class CourseController {
     @GetMapping
     public List<Course> list() {
         return courseRepository.findAll();
+ 
     }
 
 }

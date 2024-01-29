@@ -5,12 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data // = getters + setters
+@Data // = getters + setters + tostring
 @Entity
-@Table(name = "courses")
+//@Table(name = "courses") no caso de nao ser o mesmo nome da entidade, ej bd legado
 
 public class Course {
     
@@ -18,31 +17,12 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", length = 200, nullable = false)
+    @Column(length = 200, nullable = false)
     private String name;
 
-    @Column(name = "category", length = 20, nullable = false)
+    @Column(length = 20, nullable = false)
     private String category;
 
-
-    /*public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }*/
 
     
 }

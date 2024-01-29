@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.tat1roliv.crudspring.model.Course;
-import com.tat1roliv.repository.CourseRepository;
+import com.tat1roliv.crudspring.repository.CourseRepository;
+
 
 @SpringBootApplication
 public class CrudSpringApplication {
@@ -19,10 +20,12 @@ public class CrudSpringApplication {
 	CommandLineRunner initDatabase(CourseRepository courseRepository) {
 		return args -> {
 			courseRepository.deleteAll();
-			Course course = new Course();
-			course.setName("angular + spring");
-			course.setCategory("front-end from spring");
-			courseRepository.save(course);
+
+			Course c = new Course();
+			c.setName("angular + spring");
+			c.setCategory("front-end from spring");
+			
+			courseRepository.save(c);
 		};
 	}
 
