@@ -16,9 +16,11 @@ export class CoursesService {
     ];
   }*/
 
-  private readonly API = '/assets/courses.json';
+  //private readonly API = '/assets/courses.json';
   //private readonly API = '/assets/courses.json-test-error';
-
+  //private readonly API = 'http://localhost:8080/api/courses'; //erro de cors
+  private readonly API = '/api/courses'; //config proxy
+  
   list() {
     return this.httpClient.get<Course[]>(this.API).pipe(
       first(),
