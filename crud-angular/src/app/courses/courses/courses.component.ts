@@ -17,7 +17,7 @@ export class CoursesComponent {
   //coursesData: Course[] = [];
   courses$: Observable<Course[]>;
 
-  displayedColumns: string[] = [ "_id", "name", "category" ]
+  displayedColumns: string[] = [ "_id", "name", "category", "actions" ]
 
   //coursesService: CoursesService;
 
@@ -39,7 +39,7 @@ export class CoursesComponent {
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
-      
+
     });
   }
 
