@@ -24,12 +24,11 @@
           </td>
         </ng-container>
 
-        <!-- Column -->
+        <!-- Column Actions-->
         <ng-container matColumnDef="actions">
-
             <mat-header-cell *matHeaderCellDef>
-              <button mat-mini-fab color="primary" aria-label="Add course">
-                <mat-icon>add</mat-icon>
+              <button mat-mini-fab color="primary" aria-label="Add course" (click)="onAdd()">
+                <mat-icon >add</mat-icon>
               </button>
             </mat-header-cell>
 
@@ -41,7 +40,6 @@
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-cell>
-
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
