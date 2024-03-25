@@ -26,3 +26,9 @@ mat-card {
   padding: 32px;
   background-color: #f6f6f6;
 }
+
+.column-actions{
+  mat-cell {
+    width: 330px;
+  }
+}

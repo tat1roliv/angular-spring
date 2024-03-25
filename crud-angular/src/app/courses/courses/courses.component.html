@@ -25,13 +25,12 @@
         </ng-container>
 
         <!-- Column Actions-->
-        <ng-container matColumnDef="actions">
+        <ng-container matColumnDef="actions" class="column-actions">
             <mat-header-cell *matHeaderCellDef>
               <button mat-mini-fab color="primary" aria-label="Add course" (click)="onAdd()">
-                <mat-icon >add</mat-icon>
+                <mat-icon (click)="onAdd()">add</mat-icon>
               </button>
             </mat-header-cell>
-
             <mat-cell *matCellDef="let course">
               <button mat-icon-button color="primary" aria-label="Edit course">
                 <mat-icon>edit</mat-icon>

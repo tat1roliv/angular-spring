@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -27,7 +27,8 @@ export class CoursesComponent {
   constructor(
     private coursesService: CoursesService,
     public dialog: MatDialog,
-    public router: Router) {
+    public router: Router,
+    private route: ActivatedRoute,) {
 
     //this.coursesService = new CoursesService();
     this.courses$ = this.coursesService.list()
@@ -48,8 +49,9 @@ export class CoursesComponent {
   }
 
   onAdd() {
-    console.log("add function")
-    //this.router.navigate(commands: ['courses/new'])
+    //console.log("add function")
+    //this.router.navigate(['courses/new']);
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 
 }
