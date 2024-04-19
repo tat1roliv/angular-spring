@@ -32,3 +32,39 @@ $custom-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*form add*/
+.full-width{
+  width: 100%;
+}
+
+.form-min-width {
+  min-width: 150px;
+}
+
+.card {
+  max-width: calc(100% - 64px);
+  margin: 1em;
+}
+
+.form-actions-container {
+  display: flex;
+  justify-content: flex-end;
+
+  > * {
+    margin-left: 1em;
+  }
+
+}
+
+/*table courses*/
+
+.column-actions{
+  width: 100%;
+  max-width: 200px;
+
+  .column-actions-fix-cell{
+    max-width: 100px;
+    /*background-color: red;*/
+  }
+}

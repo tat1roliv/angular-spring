@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CategoryPipe } from '../../shared/pipes/category.pipe';
 
 @Component({
   selector: 'app-course-form',
@@ -10,12 +11,18 @@ export class CourseFormComponent {
 
   form: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) {
+  constructor( private formBuilder: FormBuilder ) {
     this.form = this.formBuilder.group({
-      
+      name: [null],
+      category: [null],
     })
+  }
+
+  onSubmit(){
+
+  }
+  onCancel(){
+    
   }
 
 }
