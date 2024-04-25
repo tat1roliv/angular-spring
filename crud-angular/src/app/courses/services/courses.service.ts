@@ -3,6 +3,9 @@ import { Course } from '../model/course';
 import { HttpClient } from '@angular/common/http';
 import { first, tap , delay } from 'rxjs';
 
+import { Subscription } from "rxjs";
+import { Observer } from "rxjs";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,8 +27,16 @@ export class CoursesService {
   list() {
     return this.httpClient.get<Course[]>(this.API).pipe(
       first(),
-      delay(2000),
+      delay(1000),
       tap(courses => console.log(courses))
       );
   }
+
+  //to save the added course on course-form-component
+  save(record: Course) {
+    //console.log(record)
+    this.httpClient.post<Course>(this.API, record).pipe(first());
+  }
+
+
 }
