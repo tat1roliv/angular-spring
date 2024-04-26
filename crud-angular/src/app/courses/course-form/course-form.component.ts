@@ -16,7 +16,7 @@ export class CourseFormComponent {
   form: FormGroup;
 
   constructor( private formBuilder: FormBuilder,
-    private service: CoursesService
+    public service: CoursesService
    ) {
     this.form = this.formBuilder.group({
       name: [null],
@@ -30,14 +30,18 @@ export class CourseFormComponent {
   }*/
 
   onSubmit() {
-    console.log(this.form.value)
-    /*return this.service.save(this.form.value).subscribe({
-               next: (data) => console.log(data),
-               error: () => {
-                 this.onError();
-               },
+    let dataToSubmit = this.form.value;
+    //console.log(dataToSubmit)
+    this.service.save(dataToSubmit)
 
-    });*/
+    //return this.service.save(this.form.value).subscribe({
+               //next: (data) => console.log(data),
+              // error: () => {
+                // this.onError();
+              //},
+
+   // });
+
 
 }
   onCancel(){
