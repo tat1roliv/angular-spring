@@ -11,7 +11,9 @@ import { Observer } from "rxjs";
 })
 export class CoursesService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   /*list(): Course[] {
     return [
@@ -34,8 +36,8 @@ export class CoursesService {
 
   //to save the added course on course-form-component
   save(record: Course) {
-    console.log(record)
-    //this.httpClient.post<Course>(this.API, record).pipe(first());
+    //console.log(record)
+    return this.httpClient.post<Course>(this.API, record);
   }
 
 
