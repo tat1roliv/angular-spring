@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryPipe } from '../../shared/pipes/category.pipe';
 import { CoursesService } from '../services/courses.service';
 
-import { Subscription } from "rxjs";
+import { Subscription, config } from "rxjs";
 import { Observer } from "rxjs";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -39,11 +39,14 @@ export class CourseFormComponent {
       res => console.log(res),
       error => this.onError()
     );
-
-
 }
+
   onCancel(){
     console.log("cancel")
+  }
+
+  onSuccess() {
+    this._snackBar.open("Saved!");
   }
 
   private onError(){
