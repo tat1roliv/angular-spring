@@ -6,6 +6,7 @@ import { CoursesService } from '../services/courses.service';
 import { Subscription, config } from "rxjs";
 import { Observer } from "rxjs";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-course-form',
@@ -18,7 +19,8 @@ export class CourseFormComponent {
 
   constructor( private formBuilder: FormBuilder,
     public service: CoursesService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private location: Location
    ) {
     this.form = this.formBuilder.group({
       name: [null],
@@ -36,17 +38,20 @@ export class CourseFormComponent {
     //console.log(dataToSubmit)
     this.service.save(dataToSubmit)
     .subscribe(
-      res => console.log(res),
+      //res => console.log(res),
+      res => this.onSuccess(),
       error => this.onError()
     );
 }
 
   onCancel(){
-    console.log("cancel")
+    //console.log("cancel")
+    this.location.back();
   }
 
   onSuccess() {
     this._snackBar.open("Saved!");
+    this.onCancel()
   }
 
   private onError(){
