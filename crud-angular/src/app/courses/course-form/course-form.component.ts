@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormControl,  NonNullableFormBuilder } from '@angular/forms';
 import { CategoryPipe } from '../../shared/pipes/category.pipe';
 import { CoursesService } from '../services/courses.service';
 
@@ -16,14 +16,12 @@ import { Location } from '@angular/common';
 export class CourseFormComponent {
 
   //form: UntypedFormGroup;
-
   form = this.formBuilder.group({
-    //name: [''],
     name: new FormControl('', {nonNullable: true}),
     category: ['']
   })
 
-  constructor( private formBuilder: FormBuilder,
+  constructor( private formBuilder: NonNullableFormBuilder,
     public service: CoursesService,
     private _snackBar: MatSnackBar,
     private location: Location

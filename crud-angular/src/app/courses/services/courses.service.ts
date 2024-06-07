@@ -35,7 +35,7 @@ export class CoursesService {
   }
 
   //to save the added course on course-form-component
-  save(record: Course) {
+  save(record: Partial<Course>) {
     //console.log(record)
     return this.httpClient.post<Course>(this.API, record);
   }
