@@ -1,16 +1,29 @@
-table {
-  width: 100%;
-}
 
 mat-card {
   width: calc(100% - 32px);
+  /*max-width: 600px;*/
+  max-width: 100%;
+  overflow: auto;
+
   margin: 24px auto;
   border-radius: 0px 0px 8px 8px;
+
+  text-align: center;
 
   mat-toolbar {
     border-radius: 8px 8px 0px 0px;
   }
 
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.column-actions {
+  flex: 0 0 32px;
 }
 
 .category {
