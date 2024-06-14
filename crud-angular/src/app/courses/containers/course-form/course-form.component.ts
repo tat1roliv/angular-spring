@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl,  NonNullableFormBuilder } from '@angular/forms';
-import { CategoryPipe } from '../../shared/pipes/category.pipe';
-import { CoursesService } from '../services/courses.service';
+import { CategoryPipe } from '../../../shared/pipes/category.pipe';
+import { CoursesService } from '../../services/courses.service';
 
 import { Subscription, config } from "rxjs";
 import { Observer } from "rxjs";
