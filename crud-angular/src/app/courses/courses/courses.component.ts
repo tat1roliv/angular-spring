@@ -50,7 +50,6 @@ export class CoursesComponent {
 
   onAdd() {
     //console.log("add function")
-    //this.router.navigate(['courses/new']);
     this.router.navigate(['new'], {relativeTo: this.route});
   }
 
