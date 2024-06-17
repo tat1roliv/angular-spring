@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tat1roliv.crudspring.model.Course;
@@ -31,18 +32,24 @@ public class CourseController {
 
     private final CourseRepository courseRepository;
 
-    
     public String requestMethodName(@RequestParam String param) {
         return new String();
     }
-    
+
+    //read the courses in DB
     //@RequestMapping(method = RequestMethod.GET)
     @GetMapping
     public List<Course> list() {
         return courseRepository.findAll();
- 
+    }
+    
+    //edit
+    @GetMapping("/{id}")
+    public ResponseEntity<Course> findById(@PathVariable("id") Long id) {
+       return courseRepository.findById(id).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.notFound().build());
     }
 
+    //create courses in DB
     //@RequestMapping(method = RequestMethod.POST)
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
