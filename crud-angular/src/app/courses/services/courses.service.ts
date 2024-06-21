@@ -34,11 +34,17 @@ export class CoursesService {
       );
   }
 
+  loadById(id: string) {
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
+  }
+
   //to save the added course on course-form-component
   save(record: Partial<Course>) {
     //console.log(record)
     return this.httpClient.post<Course>(this.API, record);
   }
+
+
 
 
 }
