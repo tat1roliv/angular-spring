@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -62,5 +63,20 @@ public class CourseController {
     public ResponseEntity<Course> create(@RequestBody Course course){
         return ResponseEntity.status(HttpStatus.CREATED).body(courseRepository.save(course));
     }*/
+
+    /*
+    @PutMapping("/{id}")
+    public Course update(@PathVariable("id") Long id, @RequestBody Course course){
+        return courseRepository.findById(id).map(record -> 
+        {
+            record.setName(course.getName());
+            record.setCategory(course.getCategory());
+            Course updated= courseRepository.save(record);
+            return updated;
+        }
+        )
+        .orElse(ResponseEntity.notFound().build());
+    }
+    */
 
 }
