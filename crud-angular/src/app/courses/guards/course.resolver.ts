@@ -1,15 +1,16 @@
+import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { CoursesService } from '../services/courses.service';
+import { Observable, of } from 'rxjs';
 import { Course } from '../model/course';
+import { CoursesService } from '../services/courses.service';
 
-export const courseResolver: ResolveFn<Course> = (route, state) => {
+export const courseResolver: ResolveFn<Observable<Course>> = (route, state,  service: CoursesService = inject(CoursesService)) => {
 
-  constructor(
-    private service: CoursesService
-  ) { }
-
-  if(route.params && route.params['id']){
-    return this.service.loadById(route.params['id'])
+  if (route.params?.['id']){
+    return service.loadById(route.params['id']);
   }
-  return {_id:'', name:'', category:''};
+
+  return of({_id: '', name: '', category: ''});
+
 };
+
