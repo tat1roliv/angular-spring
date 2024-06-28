@@ -43,6 +43,17 @@ export class CoursesComponent {
     );
   }
 
+  refresh(){
+    this.courses$ = this.coursesService.list()
+    .pipe(
+      catchError(error => {
+        //console.log(error)
+        this.onError('404')
+        return of([])
+      })
+    );
+  }
+
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
@@ -63,6 +74,7 @@ export class CoursesComponent {
   onRemove(course: Course){
     this.coursesService.remove(course._id).subscribe(() => {
         this._snackBar.open('Removed!');
+        this.refresh();
     });
   }
 
