@@ -7,6 +7,7 @@ import { catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -28,7 +29,8 @@ export class CoursesComponent {
     private coursesService: CoursesService,
     public dialog: MatDialog,
     public router: Router,
-    private route: ActivatedRoute,) {
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar) {
 
     //this.coursesService = new CoursesService();
     this.courses$ = this.coursesService.list()
@@ -56,6 +58,12 @@ export class CoursesComponent {
   onEdit(course: Course){
     //console.log("edit function")
     this.router.navigate(['edit', course._id ], {relativeTo: this.route});
+  }
+
+  onRemove(course: Course){
+    this.coursesService.remove(course._id).subscribe(() => {
+        this._snackBar.open('Removed!');
+    });
   }
 
 }
