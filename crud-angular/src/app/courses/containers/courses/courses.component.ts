@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { validateVerticalPosition } from '@angular/cdk/overlay';
 
 
 
@@ -19,7 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CoursesComponent {
 
   //coursesData: Course[] = [];
-  courses$: Observable<Course[]>;
+  courses$: Observable<Course[]> | null = null;
 
   displayedColumns: string[] = [ "_id", "name", "category", "actions" ]
 
@@ -31,16 +32,14 @@ export class CoursesComponent {
     public router: Router,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar) {
-
-    //this.coursesService = new CoursesService();
-    this.courses$ = this.coursesService.list()
-    .pipe(
-      catchError(error => {
-        //console.log(error)
-        this.onError('404')
-        return of([])
-      })
-    );
+    //this.courses$ = this.coursesService.list()
+    //.pipe(
+      //catchError(error => {
+        //this.onError('404')
+        //return of([])
+      //})
+    //);
+    this.refresh();
   }
 
   refresh(){
@@ -75,7 +74,10 @@ export class CoursesComponent {
     this.coursesService.remove(course._id).subscribe(() => {
         this._snackBar.open('Removed!');
         this.refresh();
-    });
+    },
+  error => {
+    this.onError('Error: course not removed!')
+  });
   }
 
 }
