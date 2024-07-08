@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { CategoryPipe } from './pipes/category.pipe';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+//import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -12,17 +12,18 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
   declarations: [
     ErrorDialogComponent,
     CategoryPipe,
-    ConfirmationDialogComponent,
+    //ConfirmationDialogComponent,
 
   ],
   imports: [
     CommonModule,
-    AppMaterialModule
+    AppMaterialModule,
+   // ConfirmationDialogComponent
   ],
   exports: [
     ErrorDialogComponent,
     CategoryPipe,
-    ConfirmationDialogComponent
+   // ConfirmationDialogComponent
   ]
 })
 export class SharedModule { }

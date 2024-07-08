@@ -1,24 +1,40 @@
-import { Component, inject } from '@angular/core';
-//import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';';
+import {ChangeDetectionStrategy, Component, Inject, inject, model, signal} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
-  styleUrl: './confirmation-dialog.component.scss'
+  styleUrl: './confirmation-dialog.component.scss',
+  standalone: true,
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-// export interface DialogData {
-//   firstName: string;
-//   lastName: string;
-//  }
+
 
 export class ConfirmationDialogComponent {
 
-/*   readonly dialogRef = inject(MatDialogRef<ConfirmationDialogComponent>);
-  readonly data  = inject<DialogData>(MAT_DIALOG_DATA) ;
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: string
+){}
+
 
   onConfirm(result: boolean): void {
     this.dialogRef.close(result);
   }
- */
+
+
 }
