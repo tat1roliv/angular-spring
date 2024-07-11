@@ -9,6 +9,7 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validateVerticalPosition } from '@angular/cdk/overlay';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -71,13 +72,24 @@ export class CoursesComponent {
   }
 
   onRemove(course: Course){
-    this.coursesService.remove(course._id).subscribe(() => {
-        this._snackBar.open('Removed!');
-        this.refresh();
-    },
-  error => {
-    this.onError('Error: course not removed!')
-  });
+    //to dialog
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: "do you want to remove this course?",
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          //removing
+          this.coursesService.remove(course._id).subscribe(() => {
+            this._snackBar.open('Removed!');
+            this.refresh();
+        },
+          error => {
+            this.onError('Error: course not removed!')
+          });
+        }
+    });
+
   }
 
 }

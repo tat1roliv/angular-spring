@@ -1,1 +1,14 @@
-<p>confirmation-dialog works!</p>
+<div class="dialog-card">
+  <h2 mat-dialog-title>Confirm delete</h2>
+  <div mat-dialog-content >
+    <p>{{ data }}</p>
+  </div>
+  <div mat-dialog-actions align="right">
+    <button mat-raised-button (click)="onConfirm(true)">Yes</button>
+    <button mat-raised-button color="primary"  (click)="onConfirm(false)" cdkFocusInitial>No</button>
+  </div>
+</div>
+
+
+
+
