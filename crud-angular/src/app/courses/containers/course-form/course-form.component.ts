@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl,  NonNullableFormBuilder } from '@angular/forms';
+import { FormControl,  NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CategoryPipe } from '../../../shared/pipes/category.pipe';
 import { CoursesService } from '../../services/courses.service';
 
@@ -21,8 +21,9 @@ export class CourseFormComponent {
   //form: UntypedFormGroup;
   form = this.formBuilder.group({
     _id: [''],
-    name: new FormControl('', {nonNullable: true}),
-    category: ['']
+    //name: new FormControl('', {nonNullable: true}, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
+    name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+    category: ['', [Validators.required]]
   })
 
   constructor( private formBuilder: NonNullableFormBuilder,
