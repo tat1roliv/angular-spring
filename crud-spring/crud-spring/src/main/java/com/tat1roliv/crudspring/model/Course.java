@@ -25,14 +25,15 @@ public class Course {
     @JsonProperty("_id")
     private Long id;
 
+
     @NotBlank
     @NotNull
-    @Length(min=5, max=200)
+    @Length(min=5, max=200)  //@Size
     @Column(length = 200, nullable = false)
     private String name;
 
     @NotNull
-    @Length(max=20)
+    @Length(max=20)  //@Size
     @Pattern(regexp = "Back-end|Front-end")
     @Column(length = 20, nullable = false)
     private String category;

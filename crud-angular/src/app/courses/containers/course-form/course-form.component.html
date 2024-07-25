@@ -7,7 +7,7 @@
       <mat-form-field class="full-width form-min-width">
         <input matInput placeholder="Name" formControlName="name" required>
         @if (form.get('name')?.invalid) {
-          <mat-error> {{ errorMessage("name") }} </mat-error>
+          <mat-error> {{ getErrorMessage('name') }} </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="full-width form-min-width">
@@ -18,7 +18,7 @@
           <mat-option value="back-end">Back-end</mat-option>
         </mat-select>
         @if (form.get('category')?.invalid) {
-          <mat-error> {{ errorMessage("category") }} </mat-error>
+          <mat-error> {{ getErrorMessage('category') }} </mat-error>
         }
       </mat-form-field>
     </form>

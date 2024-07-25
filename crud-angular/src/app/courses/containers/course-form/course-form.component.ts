@@ -26,6 +26,7 @@ export class CourseFormComponent {
     category: ['', [Validators.required]]
   })
 
+
   constructor( private formBuilder: NonNullableFormBuilder,
     public service: CoursesService,
     private _snackBar: MatSnackBar,
@@ -69,24 +70,25 @@ ngOnInit(): void {
     this._snackBar.open("Error on saving")
   }
 
-  public errorMessage(fieldName: string) {
+  public getErrorMessage(fieldName: string) {
     const field = this.form.get(fieldName);
 
-    if(field?.hasError("required")) {
-      return "Required field";
+    if(field?.hasError('required')) {
+      return 'Required field';
     }
 
-    if(field?.hasError("minlength")) {
-      const requiredLength = field.errors ? field.errors["minlength"]["requiredLength"] : 5;
-      return `Min length is 5 characters`;
+    if(field?.hasError('minlength')) {
+      const requiredLength = field.errors ? field.errors['minlength']['requiredLength'] : 5;
+      return `Min length is ${requiredLength} characters`;
     }
 
-    if(field?.hasError("minlength")) {
-      const requiredLength = field.errors ? field.errors["maxlength"]["requiredLength"] : 200;
-      return `Max length is 200 characters`;
+    if(field?.hasError('minlength')) {
+      const requiredLength = field.errors ? field.errors['maxlength']['requiredLength'] : 200;
+      return `Max length is ${requiredLength} characters`;
     }
 
-    return "Error";
+    return 'Error';
   }
+
 
 }
