@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import { FormControl,  NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CategoryPipe } from '../../../shared/pipes/category.pipe';
 import { CoursesService } from '../../services/courses.service';
@@ -11,10 +11,11 @@ import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../../model/course';
 
+
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.component.html',
-  styleUrl: './course-form.component.scss'
+  styleUrl: './course-form.component.scss',
 })
 export class CourseFormComponent {
 
@@ -22,7 +23,9 @@ export class CourseFormComponent {
   form = this.formBuilder.group({
     _id: [''],
     //name: new FormControl('', {nonNullable: true}, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
-    name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+    name: ['', [Validators.required,
+                Validators.minLength(5),
+                Validators.maxLength(200)]],
     category: ['', [Validators.required]]
   })
 
@@ -74,7 +77,7 @@ ngOnInit(): void {
     const field = this.form.get(fieldName);
 
     if(field?.hasError('required')) {
-      return 'Required field';
+      return 'This fild is required';
     }
 
     if(field?.hasError('minlength')) {
