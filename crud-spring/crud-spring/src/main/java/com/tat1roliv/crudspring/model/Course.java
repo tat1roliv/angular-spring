@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data // = getters + setters + tostring
@@ -28,14 +29,16 @@ public class Course {
 
     @NotBlank
     @NotNull
-    @Length(min=5, max=200)  //@Size
-    @Column(length = 200, nullable = false)
+    //@Length(min = 5, max = 100)  //@Size
+    @Size(min = 5, max = 100)  //@Size
+    @Column(length = 100, nullable = false)
     private String name;
 
     @NotNull
-    @Length(max=20)  //@Size
+    //@Length(max = 10)  //@Size
+    @Size(max = 10)
     @Pattern(regexp = "Back-end|Front-end")
-    @Column(length = 20, nullable = false)
+    @Column(length = 10, nullable = false)
     private String category;
     
 }

@@ -53,9 +53,17 @@ ngOnInit(): void {
     //console.log(dataToSubmit)
     this.service.save(dataToSubmit)
     .subscribe(
-      //res => console.log(res),
-      res => this.onSuccess(),
-      error => this.onError()
+      // res => this.onSuccess(),
+      // error => this.onError()
+      res => {
+        console.log(res),
+        this.onSuccess()
+      },
+
+      error => {
+        console.log(error),
+        this.onError()
+      }
     );
 }
 
