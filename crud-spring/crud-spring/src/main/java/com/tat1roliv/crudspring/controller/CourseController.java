@@ -89,7 +89,7 @@ public class CourseController {
         //courseRepository.deleteById(id);
         return courseRepository.findById(id).map(recordFound -> 
         {
-            courseRepository.deleteById(id);
+            courseRepository.deleteById(id); // hard delete
             return ResponseEntity.noContent().<Void>build();
         }
         )

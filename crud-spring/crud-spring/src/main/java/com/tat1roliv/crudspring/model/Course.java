@@ -1,5 +1,7 @@
 package com.tat1roliv.crudspring.model;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +20,8 @@ import lombok.Data;
 @Data // = getters + setters + tostring
 @Entity
 //@Table(name = "courses") no caso de nao ser o mesmo nome da entidade, ej bd legado
+@SQLDelete(sql = "UPDATE Course SET status = 'Inactive' WHERE id=?")
+@SQLRestriction("status <> 'Inactive'")
 
 public class Course {
     
@@ -29,16 +33,23 @@ public class Course {
 
     @NotBlank
     @NotNull
-    //@Length(min = 5, max = 100)  //@Size
-    @Size(min = 5, max = 100)  //@Size
+    //@Length(min = 5, max = 100)
+    @Size(min = 5, max = 100)
     @Column(length = 100, nullable = false)
     private String name;
 
     @NotNull
-    //@Length(max = 10)  //@Size
+    //@Length(max = 10)
     @Size(max = 10)
     @Pattern(regexp = "Back-end|Front-end")
     @Column(length = 10, nullable = false)
     private String category;
+
+    @NotNull
+    @Size(max = 10)
+    @Pattern(regexp = "Active|Inactive")
+    @Column(length = 10, nullable = false)
+    private String status = "Active";
+
     
 }
