@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tat1roliv.crudspring.dto.CourseDTO;
 import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.service.CourseService;
 
@@ -43,7 +44,7 @@ public class CourseController {
 
     //get service
     @GetMapping
-    public @ResponseBody List<Course> list() {
+    public @ResponseBody List<CourseDTO> list() {
         return courseService.list();
     }
     

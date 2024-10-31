@@ -1,5 +1,6 @@
 package com.tat1roliv.crudspring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.tat1roliv.crudspring.dto.CourseDTO;
 import com.tat1roliv.crudspring.exception.RecordNotFoundException;
 import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.repository.CourseRepository;
@@ -27,8 +29,15 @@ public class CourseService {
         }
         
         //get all courses DB
-        public List<Course> list() {
-                return courseRepository.findAll();
+        public List<CourseDTO> list() {
+                List<Course> courses = courseRepository.findAll();
+                List<CourseDTO> dtos = new ArrayList<>();
+                for(Course course : courses){
+                    //System.out.println(course);
+                    CourseDTO dto = new CourseDTO(course.getId(), course.getName(), course.getCategory());
+                    dtos.add(dto);
+                }       
+                return dtos;
         }
 
         //edit DB
