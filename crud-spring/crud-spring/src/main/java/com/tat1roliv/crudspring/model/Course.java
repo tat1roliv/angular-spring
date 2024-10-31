@@ -36,19 +36,13 @@ public class Course {
     @JsonProperty("_id")
     private Long id;
 
-
     @NotBlank
     @NotNull
-    //@Length(min = 5, max = 100)
     @Size(min = 5, max = 100)
     @Column(length = 100, nullable = false)
     private String name;
 
     @NotNull
-    //@Length(max = 10)
-    //@Size(max = 10)
-    //@Pattern(regexp = "Back-end|Front-end")
-    //@Enumerated(EnumType.STRING)
     @Convert(converter = CategoryConvertor.class)
     @Column(length = 10, nullable = false)
     private Category category;
