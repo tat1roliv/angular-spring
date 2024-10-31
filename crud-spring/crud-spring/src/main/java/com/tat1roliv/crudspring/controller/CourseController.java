@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tat1roliv.crudspring.dto.CourseDTO;
-import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -50,20 +49,20 @@ public class CourseController {
     
     //findbyid service
     @GetMapping("/{id}")
-    public Course findById(@PathVariable("id") @NotNull @Positive Long id) {
+    public CourseDTO findById(@PathVariable("id") @NotNull @Positive Long id) {
        return courseService.findById(id);
     }
 
     //create service
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course course){
+    public CourseDTO create(@RequestBody @Valid CourseDTO course){
         return courseService.create(course);  
     }
 
     //update service
     @PutMapping("/{id}")
-    public Course update(@PathVariable("id") @NotNull @Positive Long id, @RequestBody @Valid Course course){
+    public CourseDTO update(@PathVariable("id") @NotNull @Positive Long id, @RequestBody @Valid CourseDTO course){
         return courseService.update(id, course);
     }
 

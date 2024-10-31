@@ -2,6 +2,7 @@ package com.tat1roliv.crudspring.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +22,6 @@ import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
-
 public class CourseService {
         private final CourseRepository courseRepository;
         private final CourseMapper courseMapper;
@@ -33,35 +33,33 @@ public class CourseService {
         
         //get all courses DB
         public List<CourseDTO> list() {
-                List<Course> courses = courseRepository.findAll();
-                List<CourseDTO> dtos = new ArrayList<>();
-                for(Course course : courses){
-                    //System.out.println(course);
-                    CourseDTO dto = new CourseDTO(course.getId(), course.getName(), course.getCategory());
-                    dtos.add(dto);
-                }       
-                return dtos;
-        }
+                return courseRepository.findAll()
+                .stream()
+                .map(course -> courseMapper.toDTO(course))
+                .collect(Collectors.toList());
+        }       
 
-        //edit DB
-        public Course findById(@PathVariable("id") @NotNull @Positive Long id) {
+
+        //find by id DB
+        public CourseDTO findById(@PathVariable("id") @NotNull @Positive Long id) {
                 return courseRepository.findById(id)
+                .map(course -> courseMapper.toDTO(course))
                 .orElseThrow(() -> new RecordNotFoundException(id));
         }
 
         //create DB
-        public Course create(@RequestBody @Valid Course course){
-                return courseRepository.save(course);  
+        public CourseDTO create(@RequestBody @NotNull @Valid CourseDTO course){
+                return courseMapper.toDTO(courseRepository.save(courseMapper.toEntity(course)));  
         }
 
         //update DB
-        public Course update(@PathVariable("id") @NotNull @Positive Long id, @Valid Course course){
+        public CourseDTO update(@PathVariable("id") @NotNull @Positive Long id, @Valid CourseDTO course){
                 return courseRepository.findById(id)
                 .map(recordFound -> 
                 {
-                    recordFound.setName(course.getName());
-                    recordFound.setCategory(course.getCategory());
-                    return courseRepository.save(recordFound);
+                    recordFound.setName(course.name());
+                    recordFound.setCategory(course.category());
+                    return courseMapper.toDTO(courseRepository.save(recordFound));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
         }
 
