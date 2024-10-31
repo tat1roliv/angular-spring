@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tat1roliv.crudspring.dto.CourseDTO;
+import com.tat1roliv.crudspring.dto.mapper.CourseMapper;
 import com.tat1roliv.crudspring.exception.RecordNotFoundException;
 import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.repository.CourseRepository;
@@ -23,9 +24,11 @@ import jakarta.validation.constraints.Positive;
 
 public class CourseService {
         private final CourseRepository courseRepository;
+        private final CourseMapper courseMapper;
 
-        public CourseService(CourseRepository courseRepository) {
+        public CourseService(CourseRepository courseRepository, CourseMapper courseMapper) {
             this.courseRepository = courseRepository;
+            this.courseMapper = courseMapper;
         }
         
         //get all courses DB
