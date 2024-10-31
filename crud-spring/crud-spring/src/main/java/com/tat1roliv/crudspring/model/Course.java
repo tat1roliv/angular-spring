@@ -1,12 +1,19 @@
 package com.tat1roliv.crudspring.model;
 
+import java.lang.annotation.ElementType;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tat1roliv.crudspring.enums.Category;
+import com.tat1roliv.crudspring.enums.converters.CategoryConvertor;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,10 +46,12 @@ public class Course {
 
     @NotNull
     //@Length(max = 10)
-    @Size(max = 10)
-    @Pattern(regexp = "Back-end|Front-end")
+    //@Size(max = 10)
+    //@Pattern(regexp = "Back-end|Front-end")
+    //@Enumerated(EnumType.STRING)
+    @Convert(converter = CategoryConvertor.class)
     @Column(length = 10, nullable = false)
-    private String category;
+    private Category category;
 
     @NotNull
     @Size(max = 10)

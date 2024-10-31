@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tat1roliv.crudspring.dto.CourseDTO;
 import com.tat1roliv.crudspring.dto.mapper.CourseMapper;
+import com.tat1roliv.crudspring.enums.Category;
 import com.tat1roliv.crudspring.exception.RecordNotFoundException;
 import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.repository.CourseRepository;
@@ -58,7 +59,7 @@ public class CourseService {
                 .map(recordFound -> 
                 {
                     recordFound.setName(course.name());
-                    recordFound.setCategory(course.category());
+                    recordFound.setCategory(Category.FRONT_END);
                     return courseMapper.toDTO(courseRepository.save(recordFound));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
         }
