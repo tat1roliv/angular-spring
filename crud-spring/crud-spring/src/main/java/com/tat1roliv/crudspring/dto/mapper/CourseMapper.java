@@ -13,8 +13,7 @@ public class CourseMapper {
         if (course == null) {
             return null; //avoid null pointer exception
         }
-        //return new CourseDTO(course.getId(), course.getName(), course.getCategory());
-        return new CourseDTO(course.getId(), course.getName(), "Front-end");
+        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue());
     }
 
     public Course toEntity(CourseDTO courseDTO) {
@@ -30,9 +29,21 @@ public class CourseMapper {
             course.setId(courseDTO.id());
         }
         course.setName(courseDTO.name());
-        course.setCategory(Category.FRONT_END);
-        course.setStatus("Active");
+        course.setCategory(convertCategotyValue(courseDTO.category()));
         return course;
+    }
+
+    public Category convertCategotyValue(String value) {
+        if(value == null) {
+            return null;
+        }
+
+        return switch (value) {
+            case "Front-end" -> Category.FRONT_END;
+            case "Back-end" -> Category.BACK_END;
+            default -> throw new IllegalArgumentException("Invalid value: " + value);
+        };
+
     }
     
 }

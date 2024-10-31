@@ -1,19 +1,15 @@
 package com.tat1roliv.crudspring.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tat1roliv.crudspring.dto.CourseDTO;
 import com.tat1roliv.crudspring.dto.mapper.CourseMapper;
-import com.tat1roliv.crudspring.enums.Category;
 import com.tat1roliv.crudspring.exception.RecordNotFoundException;
-import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.repository.CourseRepository;
 
 import jakarta.validation.Valid;
@@ -42,7 +38,7 @@ public class CourseService {
 
 
         //find by id DB
-        public CourseDTO findById(@PathVariable("id") @NotNull @Positive Long id) {
+        public CourseDTO findById(@NotNull @Positive Long id) {
                 return courseRepository.findById(id)
                 .map(course -> courseMapper.toDTO(course))
                 .orElseThrow(() -> new RecordNotFoundException(id));
@@ -54,18 +50,18 @@ public class CourseService {
         }
 
         //update DB
-        public CourseDTO update(@PathVariable("id") @NotNull @Positive Long id, @Valid CourseDTO course){
+        public CourseDTO update(@NotNull @Positive Long id, @Valid CourseDTO course){
                 return courseRepository.findById(id)
                 .map(recordFound -> 
                 {
                     recordFound.setName(course.name());
-                    recordFound.setCategory(Category.FRONT_END);
+                    recordFound.setCategory(courseMapper.convertCategotyValue(course.category()));
                     return courseMapper.toDTO(courseRepository.save(recordFound));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
         }
 
         //delete DB - soft delete
-        public void delete(@PathVariable("id") @NotNull @Positive Long id){
+        public void delete(@NotNull @Positive Long id){
                 courseRepository.delete(courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id)));
         }
 
