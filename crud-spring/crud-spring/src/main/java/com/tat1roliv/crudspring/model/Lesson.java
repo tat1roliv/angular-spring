@@ -1,5 +1,7 @@
 package com.tat1roliv.crudspring.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,6 +28,7 @@ public class Lesson {
 
    @ManyToOne(fetch = FetchType.LAZY, optional = false) //muitas aulas para um curso
    @JoinColumn(name = "course_id", nullable = false)
+   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // evitar dependencia ciclica
    private Course course;
 
 

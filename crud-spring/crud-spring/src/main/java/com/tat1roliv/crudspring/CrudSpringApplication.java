@@ -32,6 +32,12 @@ public class CrudSpringApplication {
 			l.setYoutubeUrl("https://www.youtube.com/watch?v=AVZ47cnppQw");
 			l.setCourse(c);
 			c.getLessons().add(l);
+
+			Lesson l2 = new Lesson();
+			l2.setName("HÆLOS - KEXP");
+			l2.setYoutubeUrl("https://www.youtube.com/watch?v=oERJYbRU9Ts");
+			l2.setCourse(c);
+			c.getLessons().add(l2);
 			
 			courseRepository.save(c);
 		};
