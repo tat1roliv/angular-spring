@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.tat1roliv.crudspring.enums.Category;
 import com.tat1roliv.crudspring.model.Course;
+import com.tat1roliv.crudspring.model.Lesson;
 import com.tat1roliv.crudspring.repository.CourseRepository;
 
 
@@ -25,6 +26,11 @@ public class CrudSpringApplication {
 			Course c = new Course();
 			c.setName("Angular + Spring");
 			c.setCategory(Category.FRONT_END);
+
+			Lesson l = new Lesson();
+			l.setName("Batukizer - Le Mellotron");
+			l.setYoutubeUrl("https://www.youtube.com/watch?v=AVZ47cnppQw");
+			c.getLessons().add(l);
 			
 			courseRepository.save(c);
 		};

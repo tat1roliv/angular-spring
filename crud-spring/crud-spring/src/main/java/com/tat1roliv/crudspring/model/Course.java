@@ -1,5 +1,8 @@
 package com.tat1roliv.crudspring.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -9,12 +12,14 @@ import com.tat1roliv.crudspring.enums.converters.CategoryConverter;
 import com.tat1roliv.crudspring.enums.converters.StatusConverter;
 import com.tat1roliv.crudspring.enums.Status;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -49,5 +54,7 @@ public class Course {
     @Convert(converter = StatusConverter.class)
     private Status status = Status.ACTIVE;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // passa o comportamento do curso para os filhos e remove orfao
+    private List<Lesson> lessons = new ArrayList<>();
     
 }
