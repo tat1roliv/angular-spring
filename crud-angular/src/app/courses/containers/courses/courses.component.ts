@@ -44,13 +44,18 @@ export class CoursesComponent {
   }
 
   refresh(){
+
+    // const temp = this.coursesService.list()
+    // console.log(temp)
+
     this.courses$ = this.coursesService.list()
     .pipe(
+
       catchError(error => {
         //console.log(error)
         this.onError('404')
         return of([])
-      })
+      }),
     );
   }
 

@@ -19,10 +19,8 @@ import { Course } from '../../model/course';
 })
 export class CourseFormComponent {
 
-  //form: UntypedFormGroup;
   form = this.formBuilder.group({
     _id: [''],
-    //name: new FormControl('', {nonNullable: true}, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
     name: ['', [Validators.required,
                 Validators.minLength(5),
                 Validators.maxLength(200)]],
@@ -44,8 +42,8 @@ export class CourseFormComponent {
 
 ngOnInit(): void {
   const course: Course = this.route.snapshot.data['course'];
-  //console.log(course);
   this.form.setValue({_id: course._id, name: course.name, category: course.category})
+  console.log(course)
 }
 
   onSubmit() {

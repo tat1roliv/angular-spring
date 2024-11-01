@@ -1,3 +1,4 @@
+import { Lesson } from './../model/lesson';
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -10,7 +11,7 @@ export const courseResolver: ResolveFn<Observable<Course>> = (route, state,  ser
     return service.loadById(route.params['id']);
   }
 
-  return of({_id: '', name: '', category: ''});
+  return of({_id: '', name: '', category: '', lessons: []});
 
 };
 
