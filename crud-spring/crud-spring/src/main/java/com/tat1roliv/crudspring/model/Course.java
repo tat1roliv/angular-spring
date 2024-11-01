@@ -19,6 +19,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -54,7 +55,8 @@ public class Course {
     @Convert(converter = StatusConverter.class)
     private Status status = Status.ACTIVE;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // passa o comportamento do curso para os filhos e remove orfao
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // passa o comportamento do curso para os filhos e se remove curso, remove filhos
+    @JoinColumn(name = "course_id") //coluna que faz a ligacao com a tabela de curso
     private List<Lesson> lessons = new ArrayList<>();
     
 }
