@@ -55,8 +55,9 @@ public class Course {
     @Convert(converter = StatusConverter.class)
     private Status status = Status.ACTIVE;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // passa o comportamento do curso para os filhos e se remove curso, remove filhos
-    @JoinColumn(name = "course_id") //coluna que faz a ligacao com a tabela de curso
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "course") 
+    //low performance
+    //@JoinColumn(name = "course_id") //coluna que faz a ligacao com a tabela de curso
     private List<Lesson> lessons = new ArrayList<>();
     
 }

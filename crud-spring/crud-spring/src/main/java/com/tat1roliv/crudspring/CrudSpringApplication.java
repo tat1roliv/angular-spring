@@ -30,6 +30,7 @@ public class CrudSpringApplication {
 			Lesson l = new Lesson();
 			l.setName("Batukizer - Le Mellotron");
 			l.setYoutubeUrl("https://www.youtube.com/watch?v=AVZ47cnppQw");
+			l.setCourse(c);
 			c.getLessons().add(l);
 			
 			courseRepository.save(c);

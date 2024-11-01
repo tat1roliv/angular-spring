@@ -2,9 +2,12 @@ package com.tat1roliv.crudspring.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data // lombok para gerar getters, setters e toString
@@ -20,6 +23,10 @@ public class Lesson {
 
     @Column(length = 100, nullable = false)
     private String youtubeUrl;
+
+   @ManyToOne(fetch = FetchType.LAZY, optional = false) //muitas aulas para um curso
+   @JoinColumn(name = "course_id", nullable = false)
+   private Course course;
 
 
 }
