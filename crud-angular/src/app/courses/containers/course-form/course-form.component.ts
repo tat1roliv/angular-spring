@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
-import { FormControl,  NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormControl,  FormGroup,  NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CategoryPipe } from '../../../shared/pipes/category.pipe';
 import { CoursesService } from '../../services/courses.service';
 
@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../../model/course';
+import { Lesson } from '../../model/lesson';
 
 
 @Component({
@@ -19,13 +20,15 @@ import { Course } from '../../model/course';
 })
 export class CourseFormComponent {
 
-  form = this.formBuilder.group({
-    _id: [''],
-    name: ['', [Validators.required,
-                Validators.minLength(5),
-                Validators.maxLength(200)]],
-    category: ['', [Validators.required]]
-  })
+  form!: FormGroup;
+
+  // form = this.formBuilder.group({
+  //   _id: [''],
+  //   name: ['', [Validators.required,
+  //               Validators.minLength(5),
+  //               Validators.maxLength(200)]],
+  //   category: ['', [Validators.required]]
+  // })
 
 
   constructor( private formBuilder: NonNullableFormBuilder,
@@ -34,16 +37,44 @@ export class CourseFormComponent {
     private location: Location,
     private route: ActivatedRoute,
    ) {
-    //this.form = this.formBuilder.group({
-      //name: [null],
-      //category: [null],
-    //})
   }
 
 ngOnInit(): void {
   const course: Course = this.route.snapshot.data['course'];
-  this.form.setValue({_id: course._id, name: course.name, category: course.category})
-  console.log(course)
+  // this.form.setValue({_id: course._id, name: course.name, category: course.category})
+  // console.log(course);
+
+  this.form = this.formBuilder.group({
+    _id: [course._id],
+    name: [course.name, [Validators.required,
+                Validators.minLength(5),
+                Validators.maxLength(200)]],
+    category: [course.category, [Validators.required]],
+    lessons: this.formBuilder.array(this.retrieveLessons(course))
+  });
+  console.log(this.form);
+  console.log(this.form.value);
+
+}
+
+private retrieveLessons(course: Course) {
+  const lessons = [];
+
+  if(course?.lessons) {
+    course.lessons.forEach(lesson => lessons.push(this.createLesson(lesson)));
+  } else { // course is empty
+    lessons.push(this.createLesson())
+  }
+
+  return lessons;
+}
+
+private createLesson(lesson: Lesson = {id:"", name: "", youtubeUrl: ""}) {
+return this.formBuilder.group({
+  id: [lesson.id],
+  name: [lesson.name],
+  youtubeUrl: [lesson.youtubeUrl]
+})
 }
 
   onSubmit() {
