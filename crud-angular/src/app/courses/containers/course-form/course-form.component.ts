@@ -81,6 +81,22 @@ getLessonsFormArray() {
   return (<UntypedFormArray>this.form.get('lessons')).controls;
 }
 
+addNewLesson():void {
+
+  const lessons = this.form.get('lessons') as UntypedFormArray;
+
+  lessons.push(this.createLesson());
+
+}
+
+removeLesson(index: number) {
+
+  const lessons = this.form.get('lessons') as UntypedFormArray;
+
+  lessons.removeAt(index);
+
+}
+
   onSubmit() {
     let dataToSubmit = this.form.value;
     //console.log(dataToSubmit)
