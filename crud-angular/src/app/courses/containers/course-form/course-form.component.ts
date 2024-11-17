@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
-import { FormControl,  FormGroup,  NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormControl,  FormGroup,  NonNullableFormBuilder, UntypedFormArray, Validators } from '@angular/forms';
 import { CategoryPipe } from '../../../shared/pipes/category.pipe';
 import { CoursesService } from '../../services/courses.service';
 
@@ -75,6 +75,10 @@ return this.formBuilder.group({
   name: [lesson.name],
   youtubeUrl: [lesson.youtubeUrl]
 })
+}
+
+getLessonsFormArray() {
+  return (<UntypedFormArray>this.form.get('lessons')).controls;
 }
 
   onSubmit() {
