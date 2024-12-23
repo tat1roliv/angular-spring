@@ -41,8 +41,6 @@ export class CourseFormComponent {
 
 ngOnInit(): void {
   const course: Course = this.route.snapshot.data['course'];
-  // this.form.setValue({_id: course._id, name: course.name, category: course.category})
-  // console.log(course);
 
   this.form = this.formBuilder.group({
     _id: [course._id],
@@ -50,10 +48,10 @@ ngOnInit(): void {
                 Validators.minLength(5),
                 Validators.maxLength(200)]],
     category: [course.category, [Validators.required]],
-    lessons: this.formBuilder.array(this.retrieveLessons(course))
+    lessons: this.formBuilder.array(this.retrieveLessons(course), Validators.required)
   });
-  console.log(this.form);
-  console.log(this.form.value);
+  //console.log("form----"+this.form);
+  //console.log("form.value----"+this.form.value);
 
 }
 
@@ -72,8 +70,12 @@ private retrieveLessons(course: Course) {
 private createLesson(lesson: Lesson = {id:"", name: "", youtubeUrl: ""}) {
 return this.formBuilder.group({
   id: [lesson.id],
-  name: [lesson.name],
-  youtubeUrl: [lesson.youtubeUrl]
+  name: [lesson.name, [Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(100)]],
+  youtubeUrl: [lesson.youtubeUrl, [Validators.required,
+    Validators.minLength(5),
+    Validators.maxLength(100)]]
 })
 }
 
@@ -98,22 +100,26 @@ removeLesson(index: number) {
 }
 
   onSubmit() {
-    let dataToSubmit = this.form.value;
-    //console.log(dataToSubmit)
-    this.service.save(dataToSubmit)
-    .subscribe(
-      // res => this.onSuccess(),
-      // error => this.onError()
-      res => {
-        console.log(res),
-        this.onSuccess()
-      },
 
-      error => {
-        console.log(error),
-        this.onError()
-      }
-    );
+    if (this.form.valid) {
+      let dataToSubmit = this.form.value;
+      //console.log(dataToSubmit)
+      this.service.save(dataToSubmit)
+      .subscribe(
+        res => {
+          console.log(res),
+          this.onSuccess()
+        },
+
+        error => {
+          console.log(error),
+          this.onError()
+        }
+      );
+    } else {
+      this._snackBar.open("Form is invalid")
+    }
+
 }
 
   onCancel(){
@@ -150,5 +156,10 @@ removeLesson(index: number) {
     return 'Error';
   }
 
+  isFormArrayRequired() {
+    const lessons = this.form.get('lessons') as UntypedFormArray;
+    //return !lessons.valid && lessons.hasError('required') && lessons.touched;
+    return !lessons.valid && lessons.hasError('required');
+  }
 
 }

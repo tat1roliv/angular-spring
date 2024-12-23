@@ -37,45 +37,57 @@
 
       </mat-toolbar>
 
+        <mat-error
+        *ngIf="isFormArrayRequired()">
+          Add at least one lesson
+        </mat-error>
 
-            <table style="width: 100%" formArrayName="lessons"
-            *ngFor="let lesson of getLessonsFormArray(); let i = index"
-            >
+        <table style="width: 100%" formArrayName="lessons"
+        *ngFor="let lesson of getLessonsFormArray(); let i = index"
+        >
 
-              <tr [formGroupName]="i">
-                <td >
-                  <mat-form-field class="full-width">
-                    <mat-label>Lesson name</mat-label>
-                    <input
-                    matInput
-                    type="text" formControlName="name"/>
-                  </mat-form-field>
-                </td>
-                <td >
-                  <mat-form-field class="full-width">
-                    <mat-label>Lesson url</mat-label>
-                    <!-- <span matPrefix>https://youtu.be</span> -->
-                    <input
-                    matInput
-                    type="text" formControlName="youtubeUrl"/>
-                  </mat-form-field>
-                </td>
-                <td>
+          <tr [formGroupName]="i">
+            <td >
+              <mat-form-field class="full-width">
+                <mat-label>Lesson name</mat-label>
+                <input
+                matInput
+                type="text" formControlName="name"/>
+                @if ( getLessonsFormArray()[i].get('name')?.invalid) {
+                  <mat-error> Invalid </mat-error>
+                }
 
-                  <button
-                  color="warn"
-                  mat-icon-button
-                  (click)="removeLesson(i)"
-                  aria-label="Remove">
-                      <mat-icon>delete</mat-icon>
-                  </button>
-                </td>
-              </tr>
-            </table>
+              </mat-form-field>
+            </td>
+            <td >
+              <mat-form-field class="full-width">
+                <mat-label>Lesson url</mat-label>
+                <!-- <span matPrefix>https://youtu.be</span> -->
+                <input
+                matInput
+                type="text" formControlName="youtubeUrl"/>
+                @if ( getLessonsFormArray()[i].get('youtubeUrl')?.invalid) {
+                  <mat-error> Invalid </mat-error>
+                }
+              </mat-form-field>
+            </td>
+            <td>
+
+              <button
+              color="warn"
+              mat-icon-button
+              (click)="removeLesson(i)"
+              aria-label="Remove">
+                  <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </table>
 
 
 
     </form>
+
   </mat-card-content>
   <mat-card-actions class="form-actions-container">
     <button mat-raised-button (click)="onCancel()">Cancel</button>
