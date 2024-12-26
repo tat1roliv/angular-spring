@@ -38,7 +38,7 @@
       </mat-toolbar>
 
         <mat-error
-        *ngIf="isFormArrayRequired()">
+        *ngIf="formUtils.isFormArrayRequired(form,'lessons')">
           Add at least one lesson
         </mat-error>
 

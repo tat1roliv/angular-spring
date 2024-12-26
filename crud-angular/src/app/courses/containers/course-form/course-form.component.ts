@@ -11,6 +11,7 @@ import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../../model/course';
 import { Lesson } from '../../model/lesson';
+import { FormUtilsService } from '../../../shared/form/form-utils.service';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class CourseFormComponent {
     private _snackBar: MatSnackBar,
     private location: Location,
     private route: ActivatedRoute,
+    public formUtils: FormUtilsService,
    ) {
   }
 
@@ -156,10 +158,9 @@ removeLesson(index: number) {
     return 'Error';
   }
 
-  isFormArrayRequired() {
-    const lessons = this.form.get('lessons') as UntypedFormArray;
-    //return !lessons.valid && lessons.hasError('required') && lessons.touched;
-    return !lessons.valid && lessons.hasError('required');
-  }
+  // isFormArrayRequired() {
+  //   const lessons = this.form.get('lessons') as UntypedFormArray;
+  //   return !lessons.valid && lessons.hasError('required');
+  // }
 
 }
