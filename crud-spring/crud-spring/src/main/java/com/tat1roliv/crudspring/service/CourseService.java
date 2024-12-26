@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.tat1roliv.crudspring.dto.CourseDTO;
 import com.tat1roliv.crudspring.dto.mapper.CourseMapper;
 import com.tat1roliv.crudspring.exception.RecordNotFoundException;
+import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.repository.CourseRepository;
 
 import jakarta.validation.Valid;
@@ -45,17 +46,25 @@ public class CourseService {
         }
 
         //create DB
-        public CourseDTO create(@RequestBody @NotNull @Valid CourseDTO course){
-                return courseMapper.toDTO(courseRepository.save(courseMapper.toEntity(course)));  
+        public CourseDTO create(@RequestBody @NotNull @Valid CourseDTO courseDTO){
+                return courseMapper.toDTO(courseRepository.save(courseMapper.toEntity(courseDTO)));  
         }
 
         //update DB
-        public CourseDTO update(@NotNull @Positive Long id, @Valid CourseDTO course){
+        public CourseDTO update(@NotNull @Positive Long id, @Valid CourseDTO courseDTO){
                 return courseRepository.findById(id)
                 .map(recordFound -> 
                 {
-                    recordFound.setName(course.name());
-                    recordFound.setCategory(courseMapper.convertCategotyValue(course.category()));
+                    Course course = courseMapper.toEntity(courseDTO);
+                    recordFound.setName(courseDTO.name());
+                    recordFound.setCategory(courseMapper.convertCategotyValue(courseDTO.category()));
+
+                    recordFound.getLessons().clear();
+                    course.getLessons().forEach(lesson -> {
+                        //lesson.setCourse(recordFound);
+                        recordFound.getLessons().add(lesson);
+                    });
+
                     return courseMapper.toDTO(courseRepository.save(recordFound));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
         }

@@ -9,6 +9,7 @@ import com.tat1roliv.crudspring.dto.CourseDTO;
 import com.tat1roliv.crudspring.dto.LessonDTO;
 import com.tat1roliv.crudspring.enums.Category;
 import com.tat1roliv.crudspring.model.Course;
+import com.tat1roliv.crudspring.model.Lesson;
 
 @Component
 public class CourseMapper {
@@ -27,7 +28,6 @@ public class CourseMapper {
     }
 
     public Course toEntity(CourseDTO courseDTO) {
-
         if (courseDTO == null) {
             return null; //avoid null pointer exception
         }
@@ -35,11 +35,22 @@ public class CourseMapper {
         Course course = new Course();
 
         if(courseDTO.id() != null) {
-
             course.setId(courseDTO.id());
         }
         course.setName(courseDTO.name());
         course.setCategory(convertCategotyValue(courseDTO.category()));
+
+        //convert lessondto to lesson
+        List<Lesson> lessons = courseDTO.lessons().stream().map( lessonDTO -> {
+            var lesson = new Lesson();
+            lesson.setId(lessonDTO.id());
+            lesson.setName(lessonDTO.name());
+            lesson.setYoutubeUrl(lessonDTO.youtubeUrl());
+            lesson.setCourse(course);
+            return lesson;
+        }).collect(Collectors.toList());
+        
+        course.setLessons(lessons);
         return course;
     }
 
