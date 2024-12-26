@@ -5,7 +5,7 @@ import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular
   providedIn: 'root'
 })
 export class FormUtilsService {
-  formGroup: any;
+
 
   constructor() { }
 
@@ -25,7 +25,7 @@ export class FormUtilsService {
   }
 
   getErrorMessage(formGroup: UntypedFormGroup, fieldName: string) {
-    const field = this.formGroup.get(fieldName) as UntypedFormControl;
+    const field = formGroup.get(fieldName) as UntypedFormControl;
     return  this.getErrorMessageFromField(field);
 
   }
@@ -51,7 +51,7 @@ export class FormUtilsService {
 
   getFormArrayFieldErrorMessage(formGroup: UntypedFormGroup, formArrayName: string, fieldName: string, index: number) {
     const formArray = formGroup.get(formArrayName) as UntypedFormArray;
-    const field = formArray.controls[index].get(formArrayName) as UntypedFormControl;
+    const field = formArray.controls[index].get(fieldName) as UntypedFormControl;
     return this.getErrorMessageFromField(field);
   }
 

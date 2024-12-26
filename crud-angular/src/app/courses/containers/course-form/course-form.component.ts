@@ -20,17 +20,7 @@ import { FormUtilsService } from '../../../shared/form/form-utils.service';
   styleUrl: './course-form.component.scss',
 })
 export class CourseFormComponent {
-
   form!: FormGroup;
-
-  // form = this.formBuilder.group({
-  //   _id: [''],
-  //   name: ['', [Validators.required,
-  //               Validators.minLength(5),
-  //               Validators.maxLength(200)]],
-  //   category: ['', [Validators.required]]
-  // })
-
 
   constructor( private formBuilder: NonNullableFormBuilder,
     public service: CoursesService,
@@ -52,9 +42,6 @@ ngOnInit(): void {
     category: [course.category, [Validators.required]],
     lessons: this.formBuilder.array(this.retrieveLessons(course), Validators.required)
   });
-  //console.log("form----"+this.form);
-  //console.log("form.value----"+this.form.value);
-
 }
 
 private retrieveLessons(course: Course) {
@@ -86,46 +73,37 @@ getLessonsFormArray() {
 }
 
 addNewLesson():void {
-
   const lessons = this.form.get('lessons') as UntypedFormArray;
-
   lessons.push(this.createLesson());
-
 }
 
 removeLesson(index: number) {
-
   const lessons = this.form.get('lessons') as UntypedFormArray;
-
   lessons.removeAt(index);
-
 }
 
-  onSubmit() {
+onSubmit() {
 
-    if (this.form.valid) {
-      let dataToSubmit = this.form.value;
-      //console.log(dataToSubmit)
-      this.service.save(dataToSubmit)
-      .subscribe(
-        res => {
-          console.log(res),
-          this.onSuccess()
-        },
+  if (this.form.valid) {
+    let dataToSubmit = this.form.value;
+    this.service.save(dataToSubmit)
+    .subscribe(
+      res => {
+        console.log(res),
+        this.onSuccess()
+      },
 
-        error => {
-          console.log(error),
-          this.onError()
-        }
-      );
-    } else {
-      this._snackBar.open("Form is invalid")
-    }
-
+      error => {
+        console.log(error),
+        this.onError()
+      }
+    );
+  } else {
+    this.formUtils.validateAllFormFields(this.form);
+  }
 }
 
   onCancel(){
-    //console.log("cancel")
     this.location.back();
   }
 
@@ -138,29 +116,5 @@ removeLesson(index: number) {
     this._snackBar.open("Error on saving")
   }
 
-  public getErrorMessage(fieldName: string) {
-    const field = this.form.get(fieldName);
-
-    if(field?.hasError('required')) {
-      return 'This fild is required';
-    }
-
-    if(field?.hasError('minlength')) {
-      const requiredLength = field.errors ? field.errors['minlength']['requiredLength'] : 5;
-      return `Min length is ${requiredLength} characters`;
-    }
-
-    if(field?.hasError('minlength')) {
-      const requiredLength = field.errors ? field.errors['maxlength']['requiredLength'] : 200;
-      return `Max length is ${requiredLength} characters`;
-    }
-
-    return 'Error';
-  }
-
-  // isFormArrayRequired() {
-  //   const lessons = this.form.get('lessons') as UntypedFormArray;
-  //   return !lessons.valid && lessons.hasError('required');
-  // }
 
 }

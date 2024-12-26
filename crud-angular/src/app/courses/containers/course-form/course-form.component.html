@@ -8,7 +8,7 @@
         <input matInput placeholder="Name" formControlName="name" required #name>
         <mat-hint align="end">{{name.value.length || 0 }}/100</mat-hint>
         @if (form.get('name')?.invalid) {
-          <mat-error> {{ getErrorMessage('name') }} </mat-error>
+          <mat-error> {{ formUtils.getErrorMessage(form, 'name') }} </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="full-width form-min-width">
@@ -19,7 +19,7 @@
           <mat-option value="Back-end">Back-end</mat-option>
         </mat-select>
         @if (form.get('category')?.invalid) {
-          <mat-error> {{ getErrorMessage('category') }} </mat-error>
+          <mat-error> {{ formUtils.getErrorMessage(form, 'category') }} </mat-error>
         }
       </mat-form-field>
 
@@ -54,7 +54,12 @@
                 matInput
                 type="text" formControlName="name"/>
                 @if ( getLessonsFormArray()[i].get('name')?.invalid) {
-                  <mat-error> Invalid </mat-error>
+                  <mat-error> {{ formUtils.getFormArrayFieldErrorMessage(
+                    form,
+                    'lessons',
+                    'name',
+                    i)}}
+                    </mat-error>
                 }
 
               </mat-form-field>
@@ -67,7 +72,11 @@
                 matInput
                 type="text" formControlName="youtubeUrl"/>
                 @if ( getLessonsFormArray()[i].get('youtubeUrl')?.invalid) {
-                  <mat-error> Invalid </mat-error>
+                  <mat-error> {{formUtils.getFormArrayFieldErrorMessage(
+                    form,
+                    'lessons',
+                    'youtubeUrl',
+                    i)}} </mat-error>
                 }
               </mat-form-field>
             </td>
