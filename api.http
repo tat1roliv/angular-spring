@@ -6,7 +6,7 @@ content-type: application/json
 
 {
   "name": "NewCourse",
-  "category": "Back-end",
+  "category": "Front-end",
   "lessons": [
     {
       "name": "NewLesson",
