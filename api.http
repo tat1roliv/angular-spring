@@ -1,0 +1,42 @@
+GET http://localhost:8080/api/courses
+
+###
+POST http://localhost:8080/api/courses HTTP/1.1
+content-type: application/json
+
+{
+  "name": "NewCourse",
+  "category": "Back-end",
+  "lessons": [
+    {
+      "name": "NewLesson",
+      "youtubeUrl": "NewUrl"
+    },
+    {
+      "name": "NewLesson2",
+      "youtubeUrl": "NewUrl2"
+    }]
+    
+}
+
+###
+PUT http://localhost:8080/api/courses/1 HTTP/1.1
+content-type: application/json
+
+{
+    "_id": 1,
+    "name": "Angular+SpringEd",
+    "category": "Front-end",
+    "lessons": [
+      {
+        "id": 1,
+        "name": "Batukizer - Le Mellotron-ED",
+        "youtubeUrl": "https://www.youtube.com/watch?v=AVZ47cnppQw"
+      },
+      {
+        "id": 2,
+        "name": "HÆLOS - KEXP-ED",
+        "youtubeUrl": "https://www.youtube.com/watch?v=oERJYbRU9Ts"
+      }
+    ]
+  },
