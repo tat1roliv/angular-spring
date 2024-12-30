@@ -3,19 +3,26 @@ package com.tat1roliv.crudspring.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+//import org.hibernate.query.Page;
+import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tat1roliv.crudspring.dto.CourseDTO;
+import com.tat1roliv.crudspring.dto.CoursePageDTO;
 import com.tat1roliv.crudspring.dto.mapper.CourseMapper;
 import com.tat1roliv.crudspring.exception.RecordNotFoundException;
 import com.tat1roliv.crudspring.model.Course;
 import com.tat1roliv.crudspring.repository.CourseRepository;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 
 @Validated
@@ -30,12 +37,22 @@ public class CourseService {
         }
         
         //get all courses DB
-        public List<CourseDTO> list() {
-                return courseRepository.findAll()
-                .stream()
-                .map(course -> courseMapper.toDTO(course))
-                .collect(Collectors.toList());
-        }       
+        //NO DELETE
+        // public List<CourseDTO> list() {
+        //         return courseRepository.findAll()
+        //         .stream()
+        //         .map(course -> courseMapper.toDTO(course))
+        //         .collect(Collectors.toList());
+        // }   
+        
+        //get all courses DB + pagination
+        public CoursePageDTO findAll(@PositiveOrZero int page, @Positive @Max(1000) int pageSize) {
+                Page<Course> coursePage = courseRepository.findAll(PageRequest.of(page, pageSize));
+                List<CourseDTO> list = coursePage.getContent().stream()
+                        .map(courseMapper::toDTO)
+                        .toList();
+                return new CoursePageDTO(list, coursePage.getTotalElements(), coursePage.getTotalPages());
+        }  
 
 
         //find by id DB

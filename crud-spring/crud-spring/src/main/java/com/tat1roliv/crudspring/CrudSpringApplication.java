@@ -23,6 +23,9 @@ public class CrudSpringApplication {
 		return args -> {
 			courseRepository.deleteAll();
 
+			for(int i = 0; i < 20; i++) {
+
+			
 			Course c = new Course();
 			c.setName("Angular + Spring");
 			c.setCategory(Category.FRONT_END);
@@ -40,7 +43,9 @@ public class CrudSpringApplication {
 			c.getLessons().add(l2);
 			
 			courseRepository.save(c);
-		};
+		}
+	};
+
 	}
 
 }

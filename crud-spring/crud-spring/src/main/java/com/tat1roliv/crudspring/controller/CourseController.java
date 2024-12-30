@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tat1roliv.crudspring.dto.CourseDTO;
+import com.tat1roliv.crudspring.dto.CoursePageDTO;
 import com.tat1roliv.crudspring.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -40,10 +41,18 @@ public class CourseController {
     }
 
     //get service
-    @GetMapping
-    public List<CourseDTO> list() {
-        return courseService.list();
-    }
+    // @GetMapping
+    // public List<CourseDTO> list() {
+    //     return courseService.list();
+    // }
+
+    //get service v2
+     @GetMapping
+     public CoursePageDTO findAll(@RequestParam(defaultValue = "0") int page,
+             @RequestParam(defaultValue = "10") int pageSize) {
+         return courseService.findAll(page, pageSize);
+     }
+ 
     
     //findbyid service
     @GetMapping("/{id}")
