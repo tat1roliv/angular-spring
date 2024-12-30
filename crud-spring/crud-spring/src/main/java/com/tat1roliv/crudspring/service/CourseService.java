@@ -1,12 +1,9 @@
 package com.tat1roliv.crudspring.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
-//import org.hibernate.query.Page;
 import org.springframework.data.domain.PageRequest;
-//import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;

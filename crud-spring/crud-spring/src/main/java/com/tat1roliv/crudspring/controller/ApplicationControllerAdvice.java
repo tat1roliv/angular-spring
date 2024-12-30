@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.lang.reflect.Method;
-
-import org.hibernate.mapping.Constraint;
 import org.springframework.http.HttpStatus;
 
 import com.tat1roliv.crudspring.exception.RecordNotFoundException;
